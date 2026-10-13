@@ -1,0 +1,1 @@
+export function GET(){const publisher=process.env.ADSENSE_PUBLISHER_ID;if(!publisher)return new Response(null,{status:204,headers:{"cache-control":"public, max-age=3600"}});return new Response(`google.com, ${publisher}, DIRECT, f08c47fec0942fa0\n`,{headers:{"content-type":"text/plain; charset=utf-8","cache-control":"public, max-age=3600"}})}

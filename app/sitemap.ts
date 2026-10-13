@@ -1,0 +1,5 @@
+import type {MetadataRoute} from "next";
+import {site} from "@/lib/site";
+import {calculators} from "@/lib/calculators";
+import {guides,isGuideIndexable} from "@/lib/guides";
+export default function sitemap():MetadataRoute.Sitemap{const staticRoutes=["","/calculators","/guides","/compare","/about","/authors","/methodology","/sources","/editorial-policy","/corrections","/advertising-policy","/affiliate-disclosure","/disclaimer","/privacy","/cookie-policy","/terms","/accessibility","/copyright","/support","/contact"];const modified=new Date(`${site.reviewDateIso}T00:00:00Z`);return [...staticRoutes.map(p=>({url:site.url+p,lastModified:modified,changeFrequency:p===""?"weekly" as const:"monthly" as const,priority:p===""?1:.7})),...calculators.map(c=>({url:`${site.url}/calculators/${c.slug}`,lastModified:modified,changeFrequency:"monthly" as const,priority:c.intent==="decision"?.9:.85})),...guides.filter(g=>isGuideIndexable(g.slug)).map(g=>({url:`${site.url}/guides/${g.slug}`,lastModified:modified,changeFrequency:"monthly" as const,priority:.75}))]}
